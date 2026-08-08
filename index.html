@@ -3,302 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bipin Khanal | Portfolio</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#0f172a;
-    color:#fff;
-}
-
-header{
-    width:100%;
-    position:fixed;
-    top:0;
-    left:0;
-    background:#111827;
-    box-shadow:0 2px 10px rgba(0,0,0,.4);
-}
-
-nav{
-    width:90%;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 0;
-}
-
-.logo{
-    color:#38bdf8;
-    font-size:28px;
-    font-weight:bold;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-}
-
-nav ul li{
-    margin-left:25px;
-}
-
-nav ul li a{
-    text-decoration:none;
-    color:white;
-    transition:.3s;
-}
-
-nav ul li a:hover{
-    color:#38bdf8;
-}
-
-section{
-    width:90%;
-    margin:auto;
-    padding:100px 0;
-}
-
-.hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
-
-.hero h1{
-    font-size:55px;
-}
-
-.hero h1 span{
-    color:#38bdf8;
-}
-
-.hero h2{
-    margin:15px 0;
-    color:#cbd5e1;
-}
-
-.hero p{
-    max-width:700px;
-    margin:auto;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    background:#38bdf8;
-    color:#000;
-    text-decoration:none;
-    padding:12px 30px;
-    border-radius:30px;
-    font-weight:bold;
-    transition:.3s;
-}
-
-.btn:hover{
-    background:white;
-    transform:scale(1.05);
-}
-
-.title{
-    text-align:center;
-    font-size:35px;
-    margin-bottom:40px;
-    color:#38bdf8;
-}
-
-.about p{
-    text-align:center;
-    max-width:800px;
-    margin:auto;
-    line-height:1.8;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:#1e293b;
-    padding:30px;
-    border-radius:12px;
-    text-align:center;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-    background:#334155;
-}
-
-.card h3{
-    margin-bottom:15px;
-    color:#f8d838;
-}
-
-.contact{
-    text-align:center;
-}
-
-.contact p{
-    margin:10px 0;
-}
-
-footer{
-    background:#111827;
-    text-align:center;
-    padding:20px;
-}
-</style>
-
+<title>Bipin Khanal — IT Engineering Student </title>
+<meta name="description" content="Portfolio of Bipin Khanal, IT engineering student. Projects, skills, and contact information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-
-<nav>
-
-<div class="logo">Bipin.</div>
-
-<ul>
-<li><a href="#home">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-
-</nav>
-
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="top">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">BK<span class="nav-mark-sub">/dev</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinksMobile" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <ul class="nav-links nav-links-mobile" id="navLinksMobile">
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </header>
 
-<section class="hero" id="home">
+<main>
 
-<div>
+  <!-- ============ HERO / PROFILE ============ -->
+  <section class="sheet hero" id="profile">
+    <div class="sheet-label"><span class="tick"></span>SHEET 01 — PROFILE<span class="tick"></span></div>
 
-<h1>Hello, I'm <span>BIPIN KHANAL</span></h1>
+    <div class="hero-grid">
+      <div class="hero-photo-frame">
+        <img src="c:\Users\ASUS\Downloads\phottta.jpeg" alt="Portrait of Bipin Khanal" class="hero-photo" id="profilePhoto"
+             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%23132B3D%22/><text x=%2250%25%22 y=%2252%25%22 fill=%22%236E96B3%22 font-family=%22monospace%22 font-size=%2222%22 text-anchor=%22middle%22>PHOTO</text></svg>'">
+        <span class="frame-tick tl"></span><span class="frame-tick tr"></span>
+        <span class="frame-tick bl"></span><span class="frame-tick br"></span>
+      </div>
 
-<h2>IT Engineering Student</h2>
+      <div class="hero-copy">
+        <p class="eyebrow"></p>
+        <h1>Bipin Khanal</h1>
+        <p class="hero-role">IT Engineering Student &amp; Web Developer</p>
+        <p class="hero-terminal" aria-hidden="true"><span id="typedText"></span><span class="cursor">▌</span></p>
+        <p class="hero-desc">
+          I'm an IT engineering student building practical, well-structured web applications
+          while I learn. This site documents what I've built so far and how I approach
+          front-end and back-end problems — it will keep growing as my skills do.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<p>
-I enjoy building responsive websites and learning modern web development technologies.
-I love HTML, CSS, JavaScript, C++, and creating beautiful user interfaces.
-</p>
+  <!-- ============ SKILLS ============ -->
+  <section class="sheet" id="skills">
+    <div class="sheet-label"><span class="tick"></span>SHEET 02 — TOOLKIT<span class="tick"></span></div>
+    <h2 class="sheet-title">Skills &amp; Tools</h2>
+    <p class="sheet-intro">
+      Technologies I'm actively studying and using in coursework and personal projects.
+      <em></em>
+    </p>
 
-<a href="#contact" class="btn">Contact Me</a>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <ul class="chip-list">
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">Responsive Design</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <ul class="chip-list">
+          <li class="chip">Node.js</li>
+          <li class="chip">Express</li>
+          <li class="chip">PHP <span class="chip-note">(coursework)</span></li>
+          <li class="chip">REST APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Tools &amp; Practices</h3>
+        <ul class="chip-list">
+          <li class="chip">Git &amp; GitHub</li>
+          <li class="chip">VS Code</li>
+          <li class="chip">Basic SQL</li>
+          <li class="chip">Debugging &amp; Testing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <!-- ============ PROJECTS ============ -->
+  <section class="sheet" id="projects">
+    <div class="sheet-label"><span class="tick"></span>SHEET 03 — PROJECTS<span class="tick"></span></div>
+    <h2 class="sheet-title">Projects</h2>
+    <p class="sheet-intro">
+      A selection of applications built to practice core concepts. Each entry links to a
+      working demo and, where noted, source code.
+    </p>
 
-</section>
+    <div class="project-grid">
 
-<section class="about" id="about">
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="status-tag status-shipped">Shipped</span>
+          <span class="project-index">01</span>
+        </div>
+        <h3>Calculator</h3>
+        <p>
+          A browser-based calculator supporting basic arithmetic (addition, subtraction,
+          multiplication, division) with keyboard input support and clear/backspace handling.
+          Built with vanilla HTML, CSS, and JavaScript to practice DOM manipulation, event
+          handling, and input validation.
+        </p>
+        <ul class="tech-tags">
+          <li>HTML</li><li>CSS</li><li>JavaScript</li>
+        </ul>
+        <div class="project-links">
+          <a href="projects/calculator/index.html" class="link-arrow">Live demo →</a>
+          <a href="#" class="link-arrow link-muted" title="Replace with your GitHub repo link">Source code →</a>
+        </div>
+      </article>
 
-<h2 class="title">About Me</h2>
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="status-tag status-shipped">Shipped</span>
+          <span class="project-index">02</span>
+        </div>
+        <h3>To-Do List App</h3>
+        <p>
+          A simple task manager that lets users add, complete, and delete tasks, with tasks
+          persisted in the browser's local storage so the list survives a page refresh. Built
+          to practice arrays, local storage, and dynamic DOM rendering.
+        </p>
+        <ul class="tech-tags">
+          <li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li>
+        </ul>
+        <div class="project-links">
+          <a href="projects/todo-list/index.html" class="link-arrow">Live demo →</a>
+          <a href="#" class="link-arrow link-muted" title="Replace with your GitHub repo link">Source code →</a>
+        </div>
+      </article>
 
-<p>
-I am a Bachelor of IT Engineering student from Nepal. I enjoy solving programming problems,
-creating websites, and learning new technologies. My goal is to become a professional Full Stack Web Developer.
-</p>
+      <article class="project-card project-card-placeholder">
+        <div class="project-card-head">
+          <span class="status-tag status-progress">In Progress</span>
+          <span class="project-index">03</span>
+        </div>
+        <h3>Other Projects</h3>
+        <p>
+          New project SOON
+        </p>
+        <ul class="tech-tags">
+          <li>Tech stack</li>
+        </ul>
+        <div class="project-links">
+          <a href="#" class="link-arrow link-muted">Live demo →</a>
+          <a href="#" class="link-arrow link-muted">Source code →</a>
+        </div>
+      </article>
 
-</section>
+    </div>
+  </section>
 
-<section id="skills">
+  <!-- ============ CONTACT ============ -->
+  <section class="sheet" id="contact">
+    <div class="sheet-label"><span class="tick"></span>SHEET 04 — CONTACT<span class="tick"></span></div>
+    <h2 class="sheet-title">Get in Touch</h2>
+    <p class="sheet-intro">
+      Have a role, project, or question in mind? Send a message below and I'll get back to you.
+    </p>
 
-<h2 class="title">Skills</h2>
+    <div class="contact-grid">
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+          <span class="field-error" id="nameError"></span>
+        </div>
 
-<div class="grid">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+          <span class="field-error" id="emailError"></span>
+        </div>
 
-<div class="card">
-<h3>HTML</h3>
-<p>Building semantic web pages.</p>
-</div>
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <span class="field-error" id="messageError"></span>
+        </div>
 
-<div class="card">
-<h3>CSS</h3>
-<p>Responsive layouts and modern designs.</p>
-</div>
+        <!-- Honeypot field for basic spam protection: kept hidden from real users -->
+        <div class="form-row form-row-honeypot" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
 
-<div class="card">
-<h3>JavaScript</h3>
-<p>Interactive websites and DOM manipulation.</p>
-</div>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
 
-<div class="card">
-<h3>C++</h3>
-<p>Object-Oriented Programming.</p>
-</div>
+      <aside class="contact-side">
+        <h3>Direct Contact</h3>
+        <ul class="contact-list">
+          <li><span class="contact-label">Email</span><a href="mailto:bipin.khanal2062@gmail.com">bipinkhanal@gmail.com</a></li>
+          <li><span class="contact-label">GitHub</span><a href="#" title="https://github.com/bipin-it">github.com/bipin-it</a></li>
+          
+          <li><span class="contact-label">Location</span><span>Kathmandu, Nepal</span></li>
+        </ul>
+        <p class="contact-note">
+          
+        </p>
+      </aside>
+    </div>
+  </section>
 
-<div class="card">
-<h3>GitHub</h3>
-<p>Version control and project management.</p>
-</div>
+</main>
 
-<div class="card">
-<h3>Responsive Design</h3>
-<p>Mobile-friendly websites.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="projects">
-
-<h2 class="title">Projects</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Portfolio Website</h3>
-<p>Personal portfolio using HTML and CSS.</p>
-</div>
-
-<div class="card">
-<h3>Weather App</h3>
-<p>Weather application using JavaScript API.</p>
-</div>
-
-<div class="card">
-<h3>Student Management</h3>
-<p>C++ OOP-based student management system.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="contact" id="contact">
-
-<h2 class="title">Contact</h2>
-
-<p>📧 Email: bipin@example.com</p>
-
-<p>💻 GitHub: github.com/bipinkhanal</p>
-
-<p>📍 Nepal</p>
-
-<a href="mailto:bipin@example.com" class="btn">Send Email</a>
-
-</section>
-
-<footer>
-
-<p>© 2026 Bipin Khanal | All Rights Reserved</p>
-
+<footer class="site-footer">
+  <p>© <span id="year"></span> Bipin Khanal. Built with HTML, CSS, JavaScript, and Node.js.</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
