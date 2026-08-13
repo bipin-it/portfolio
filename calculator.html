@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator — Bipin Khanal</title>
+<style>
+  :root {
+    --ink: #16232E; --blueprint: #0F3D5C; --paper: #EFEBDD;
+    --signal: #C97514; --key: #F7F4EA; --border: rgba(22,35,46,0.16);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 18px;
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Mono", "Courier New", monospace;
+    padding: 24px;
+  }
+  a.back { align-self: flex-start; color: var(--blueprint); text-decoration: none; font-size: 13px; }
+  .calculator {
+    width: 300px; background: #fff; border: 1px solid var(--border);
+    border-radius: 6px; padding: 18px; box-shadow: 0 2px 0 var(--border);
+  }
+  .display {
+    background: var(--blueprint); color: var(--paper);
+    font-size: 1.8rem; text-align: right; padding: 18px 14px;
+    border-radius: 4px; margin-bottom: 14px; overflow-x: auto;
+    white-space: nowrap;
+  }
+  .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  button {
+    font-family: inherit; font-size: 1rem; padding: 16px 0;
+    border: 1px solid var(--border); border-radius: 4px; cursor: pointer;
+    background: var(--key); color: var(--ink);
+  }
+  button:hover { background: #eee6d6; }
+  button.op { color: var(--blueprint); font-weight: 600; }
+  button.equals { background: var(--signal); color: #fff; grid-column: span 2; }
+  button.clear { color: #A5372A; }
+</style>
+</head>
+<body>
+  <a class="back" href="files/index.html">← Back to portfolio</a>
+  <div class="calculator">
+    <div class="display" id="display" aria-live="polite">0</div>
+    <div class="keys">
+      <button class="clear" data-action="clear">C</button>
+      <button class="op" data-action="backspace">⌫</button>
+      <button class="op" data-value="%">%</button>
+      <button class="op" data-value="/">÷</button>
+
+      <button data-value="7">7</button>
+      <button data-value="8">8</button>
+      <button data-value="9">9</button>
+      <button class="op" data-value="*">×</button>
+
+      <button data-value="4">4</button>
+      <button data-value="5">5</button>
+      <button data-value="6">6</button>
+      <button class="op" data-value="-">−</button>
+
+      <button data-value="1">1</button>
+      <button data-value="2">2</button>
+      <button data-value="3">3</button>
+      <button class="op" data-value="+">+</button>
+
+      <button data-value="0">0</button>
+      <button data-value=".">.</button>
+      <button class="equals" data-action="equals">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    let expression = "";
+
+    function render() {
+      display.textContent = expression === "" ? "0" : expression;
+    }
+
+    function isOperator(ch) {
+      return ["+", "-", "*", "/", "%"].includes(ch);
+    }
+
+    function appendValue(value) {
+      const last = expression.slice(-1);
+      if (isOperator(value) && (expression === "" || isOperator(last))) {
+        // Prevent two operators in a row (allow replacing the last one)
+        if (expression === "") return;
+        expression = expression.slice(0, -1) + value;
+      } else {
+        expression += value;
+      }
+      render();
+    }
+
+    function clearAll() {
+      expression = "";
+      render();
+    }
+
+    function backspace() {
+      expression = expression.slice(0, -1);
+      render();
+    }
+
+    function calculate() {
+      if (expression === "") return;
+      try {
+        // Only digits, operators, decimal points, and % are ever placed
+        // into `expression` (see appendValue), so this is safe to evaluate.
+        const sanitized = expression.replace(/%/g, "/100");
+        const result = Function(`"use strict"; return (${sanitized})`)();
+        if (!isFinite(result)) throw new Error("Invalid result");
+        expression = String(Math.round(result * 1e10) / 1e10);
+      } catch (err) {
+        expression = "Error";
+      }
+      render();
+    }
+
+    document.querySelectorAll(".keys button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const { action, value } = btn.dataset;
+        if (action === "clear") return clearAll();
+        if (action === "backspace") return backspace();
+        if (action === "equals") return calculate();
+        if (value !== undefined) return appendValue(value);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (/[0-9.]/.test(e.key)) return appendValue(e.key);
+      if (["+", "-", "*", "/", "%"].includes(e.key)) return appendValue(e.key);
+      if (e.key === "Enter" || e.key === "=") return calculate();
+      if (e.key === "Backspace") return backspace();
+      if (e.key === "Escape") return clearAll();
+    });
+
+    render();
+  </script>
+</body>
+</html>

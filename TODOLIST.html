@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List — Bipin Khanal</title>
+<style>
+  :root {
+    --ink: #16232E; --blueprint: #0F3D5C; --paper: #EFEBDD;
+    --signal: #C97514; --border: rgba(22,35,46,0.16); --green: #3E6B52;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 48px 20px; gap: 18px;
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, sans-serif;
+  }
+  a.back {
+    align-self: flex-start; max-width: 420px; width: 100%;
+    color: var(--blueprint); text-decoration: none;
+    font-family: "IBM Plex Mono", monospace; font-size: 13px;
+    margin: 0 auto;
+  }
+  .card {
+    width: 100%; max-width: 420px; background: #fff;
+    border: 1px solid var(--border); border-radius: 6px; padding: 24px;
+  }
+  h1 { font-family: "IBM Plex Mono", monospace; font-size: 1.3rem; margin: 0 0 18px; }
+  form { display: flex; gap: 8px; margin-bottom: 18px; }
+  input[type="text"] {
+    flex: 1; padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 4px; font-size: 15px;
+  }
+  button {
+    font-family: "IBM Plex Mono", monospace; font-size: 13px;
+    background: var(--signal); color: #fff; border: none;
+    border-radius: 4px; padding: 0 16px; cursor: pointer;
+  }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  li {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px;
+  }
+  li.done span.task-text { text-decoration: line-through; color: #8a8a8a; }
+  li span.task-text { flex: 1; }
+  li button.delete {
+    background: none; color: #A5372A; font-size: 16px; padding: 0 6px;
+  }
+  .empty-state { color: #8a8a8a; font-size: 14px; text-align: center; padding: 12px 0; }
+</style>
+</head>
+<body>
+  <a class="back" href="files/index.html">← Back to portfolio</a>
+  <div class="card">
+    <h1>To-Do List</h1>
+    <form id="taskForm">
+      <input type="text" id="taskInput" placeholder="Add a task…" autocomplete="off" required>
+      <button type="submit">Add</button>
+    </form>
+    <ul id="taskList"></ul>
+    <p class="empty-state" id="emptyState">No tasks yet — add one above.</p>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "bk-todo-tasks";
+    const form = document.getElementById("taskForm");
+    const input = document.getElementById("taskInput");
+    const list = document.getElementById("taskList");
+    const emptyState = document.getElementById("emptyState");
+
+    function loadTasks() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    }
+//
+    function render() {
+      const tasks = loadTasks();
+      list.innerHTML = "";
+      emptyState.style.display = tasks.length === 0 ? "block" : "none";
+
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        if (task.done) li.classList.add("done");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.done;
+        checkbox.addEventListener("change", () => toggleTask(index));
+
+        const span = document.createElement("span");
+        span.className = "task-text";
+        span.textContent = task.text;
+
+        const del = document.createElement("button");
+        del.className = "delete";
+        del.textContent = "✕";
+        del.setAttribute("aria-label", `Delete task: ${task.text}`);
+        del.addEventListener("click", () => deleteTask(index));
+
+        li.append(checkbox, span, del);
+        list.appendChild(li);
+      });
+    }
+
+    function addTask(text) {
+      const tasks = loadTasks();
+      tasks.push({ text, done: false });
+      saveTasks(tasks);
+      render();
+    }
+
+    function toggleTask(index) {
+      const tasks = loadTasks();
+      tasks[index].done = !tasks[index].done;
+      saveTasks(tasks);
+      render();
+    }
+
+    function deleteTask(index) {
+      const tasks = loadTasks();
+      tasks.splice(index, 1);
+      saveTasks(tasks);
+      render();
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      addTask(value);
+      input.value = "";
+      input.focus();
+    });
+
+    render();
+  </script>
+</body>
+</html>
