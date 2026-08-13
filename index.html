@@ -3,144 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>To-Do List — Bipin Khanal</title>
-<style>
-  :root {
-    --ink: #16232E; --blueprint: #0F3D5C; --paper: #EFEBDD;
-    --signal: #C97514; --border: rgba(22,35,46,0.16); --green: #3E6B52;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; padding: 48px 20px; gap: 18px;
-    background: var(--paper); color: var(--ink);
-    font-family: "IBM Plex Sans", -apple-system, sans-serif;
-  }
-  a.back {
-    align-self: flex-start; max-width: 420px; width: 100%;
-    color: var(--blueprint); text-decoration: none;
-    font-family: "IBM Plex Mono", monospace; font-size: 13px;
-    margin: 0 auto;
-  }
-  .card {
-    width: 100%; max-width: 420px; background: #fff;
-    border: 1px solid var(--border); border-radius: 6px; padding: 24px;
-  }
-  h1 { font-family: "IBM Plex Mono", monospace; font-size: 1.3rem; margin: 0 0 18px; }
-  form { display: flex; gap: 8px; margin-bottom: 18px; }
-  input[type="text"] {
-    flex: 1; padding: 10px 12px; border: 1px solid var(--border);
-    border-radius: 4px; font-size: 15px;
-  }
-  button {
-    font-family: "IBM Plex Mono", monospace; font-size: 13px;
-    background: var(--signal); color: #fff; border: none;
-    border-radius: 4px; padding: 0 16px; cursor: pointer;
-  }
-  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  li {
-    display: flex; align-items: center; gap: 10px;
-    border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px;
-  }
-  li.done span.task-text { text-decoration: line-through; color: #8a8a8a; }
-  li span.task-text { flex: 1; }
-  li button.delete {
-    background: none; color: #A5372A; font-size: 16px; padding: 0 6px;
-  }
-  .empty-state { color: #8a8a8a; font-size: 14px; text-align: center; padding: 12px 0; }
-</style>
+<title>Bipin Khanal — IT Engineering Student & Developer</title>
+<meta name="description" content="Portfolio of Bipin Khanal, IT engineering student. Projects, skills, and contact information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="back" href="../../index.html">← Back to portfolio</a>
-  <div class="card">
-    <h1>To-Do List</h1>
-    <form id="taskForm">
-      <input type="text" id="taskInput" placeholder="Add a task…" autocomplete="off" required>
-      <button type="submit">Add</button>
-    </form>
-    <ul id="taskList"></ul>
-    <p class="empty-state" id="emptyState">No tasks yet — add one above.</p>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="top">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">BK<span class="nav-mark-sub">/dev</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinksMobile" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+  <ul class="nav-links nav-links-mobile" id="navLinksMobile">
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</header>
 
-  <script>
-    const STORAGE_KEY = "bk-todo-tasks";
-    const form = document.getElementById("taskForm");
-    const input = document.getElementById("taskInput");
-    const list = document.getElementById("taskList");
-    const emptyState = document.getElementById("emptyState");
+<main>
 
-    function loadTasks() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      } catch {
-        return [];
-      }
-    }
+  <!-- ============ HERO / PROFILE ============ -->
+  <section class="sheet hero" id="profile">
+    <div class="sheet-label"><span class="tick"></span>SHEET 01 — PROFILE<span class="tick"></span></div>
 
-    function saveTasks(tasks) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    }
+    <div class="hero-grid">
+      <div class="hero-photo-frame">
+        <img src="assets/profile-photo.jpg" alt="Portrait of Bipin Khanal" class="hero-photo" id="profilePhoto"
+             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%23132B3D%22/><text x=%2250%25%22 y=%2252%25%22 fill=%22%236E96B3%22 font-family=%22monospace%22 font-size=%2222%22 text-anchor=%22middle%22>PHOTO</text></svg>'">
+        <span class="frame-tick tl"></span><span class="frame-tick tr"></span>
+        <span class="frame-tick bl"></span><span class="frame-tick br"></span>
+      </div>
 
-    function render() {
-      const tasks = loadTasks();
-      list.innerHTML = "";
-      emptyState.style.display = tasks.length === 0 ? "block" : "none";
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio — Rev. 1.0</p>
+        <h1>Bipin Khanal</h1>
+        <p class="hero-role">IT Engineering Student &amp; Web Developer</p>
+        <p class="hero-terminal" aria-hidden="true"><span id="typedText"></span><span class="cursor">▌</span></p>
+        <p class="hero-desc">
+          I'm an IT engineering student building practical, well-structured web applications
+          while I learn. This site documents what I've built so far and how I approach
+          front-end and back-end problems — it will keep growing as my skills do.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      tasks.forEach((task, index) => {
-        const li = document.createElement("li");
-        if (task.done) li.classList.add("done");
+  <!-- ============ SKILLS ============ -->
+  <section class="sheet" id="skills">
+    <div class="sheet-label"><span class="tick"></span>SHEET 02 — TOOLKIT<span class="tick"></span></div>
+    <h2 class="sheet-title">Skills &amp; Tools</h2>
+    <p class="sheet-intro">
+      Technologies I'm actively studying and using in coursework and personal projects.
+      <em>Note: these reflect a learning-in-progress skill set, not expert-level mastery.</em>
+    </p>
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = task.done;
-        checkbox.addEventListener("change", () => toggleTask(index));
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <ul class="chip-list">
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">Responsive Design</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <ul class="chip-list">
+          <li class="chip">Node.js</li>
+          <li class="chip">Express</li>
+          <li class="chip">PHP <span class="chip-note">(coursework)</span></li>
+          <li class="chip">REST APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Tools &amp; Practices</h3>
+        <ul class="chip-list">
+          <li class="chip">Git &amp; GitHub</li>
+          <li class="chip">VS Code</li>
+          <li class="chip">Basic SQL</li>
+          <li class="chip">Debugging &amp; Testing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        const span = document.createElement("span");
-        span.className = "task-text";
-        span.textContent = task.text;
+  <!-- ============ PROJECTS ============ -->
+  <section class="sheet" id="projects">
+    <div class="sheet-label"><span class="tick"></span>SHEET 03 — PROJECTS<span class="tick"></span></div>
+    <h2 class="sheet-title">Projects</h2>
+    <p class="sheet-intro">
+      A selection of applications built to practice core concepts. Each entry links to a
+      working demo and, where noted, source code.
+    </p>
 
-        const del = document.createElement("button");
-        del.className = "delete";
-        del.textContent = "✕";
-        del.setAttribute("aria-label", `Delete task: ${task.text}`);
-        del.addEventListener("click", () => deleteTask(index));
+    <div class="project-grid">
 
-        li.append(checkbox, span, del);
-        list.appendChild(li);
-      });
-    }
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="status-tag status-shipped">Shipped</span>
+          <span class="project-index">01</span>
+        </div>
+        <h3>Calculator</h3>
+        <p>
+          A browser-based calculator supporting basic arithmetic (addition, subtraction,
+          multiplication, division) with keyboard input support and clear/backspace handling.
+          Built with vanilla HTML, CSS, and JavaScript to practice DOM manipulation, event
+          handling, and input validation.
+        </p>
+        <ul class="tech-tags">
+          <li>HTML</li><li>CSS</li><li>JavaScript</li>
+        </ul>
+        <div class="project-links">
+          <a href="projects/calculator/index.html" class="link-arrow">Live demo →</a>
+          <a href="#" class="link-arrow link-muted" title="Replace with your GitHub repo link">Source code →</a>
+        </div>
+      </article>
 
-    function addTask(text) {
-      const tasks = loadTasks();
-      tasks.push({ text, done: false });
-      saveTasks(tasks);
-      render();
-    }
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="status-tag status-shipped">Shipped</span>
+          <span class="project-index">02</span>
+        </div>
+        <h3>To-Do List App</h3>
+        <p>
+          A simple task manager that lets users add, complete, and delete tasks, with tasks
+          persisted in the browser's local storage so the list survives a page refresh. Built
+          to practice arrays, local storage, and dynamic DOM rendering.
+        </p>
+        <ul class="tech-tags">
+          <li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li>
+        </ul>
+        <div class="project-links">
+          <a href="projects/todo-list/index.html" class="link-arrow">Live demo →</a>
+          <a href="#" class="link-arrow link-muted" title="Replace with your GitHub repo link">Source code →</a>
+        </div>
+      </article>
 
-    function toggleTask(index) {
-      const tasks = loadTasks();
-      tasks[index].done = !tasks[index].done;
-      saveTasks(tasks);
-      render();
-    }
+      <article class="project-card project-card-placeholder">
+        <div class="project-card-head">
+          <span class="status-tag status-progress">In Progress</span>
+          <span class="project-index">03</span>
+        </div>
+        <h3>Your Next Project</h3>
+        <p>
+          Add a real project here — a class assignment, a hackathon build, or something you're
+          working on independently. Swap this card's text, tags, and links for the actual
+          project details.
+        </p>
+        <ul class="tech-tags">
+          <li>Tech stack</li>
+        </ul>
+        <div class="project-links">
+          <a href="#" class="link-arrow link-muted">Live demo →</a>
+          <a href="#" class="link-arrow link-muted">Source code →</a>
+        </div>
+      </article>
 
-    function deleteTask(index) {
-      const tasks = loadTasks();
-      tasks.splice(index, 1);
-      saveTasks(tasks);
-      render();
-    }
+    </div>
+  </section>
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const value = input.value.trim();
-      if (!value) return;
-      addTask(value);
-      input.value = "";
-      input.focus();
-    });
+  <!-- ============ CONTACT ============ -->
+  <section class="sheet" id="contact">
+    <div class="sheet-label"><span class="tick"></span>SHEET 04 — CONTACT<span class="tick"></span></div>
+    <h2 class="sheet-title">Get in Touch</h2>
+    <p class="sheet-intro">
+      Have a role, project, or question in mind? Send a message below and I'll get back to you.
+    </p>
 
-    render();
-  </script>
+    <div class="contact-grid">
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+          <span class="field-error" id="nameError"></span>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+          <span class="field-error" id="emailError"></span>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <span class="field-error" id="messageError"></span>
+        </div>
+
+        <!-- Honeypot field for basic spam protection: kept hidden from real users -->
+        <div class="form-row form-row-honeypot" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="contact-side">
+        <h3>Direct Contact</h3>
+        <ul class="contact-list">
+          <li><span class="contact-label">Email</span><a href="mailto:bipin.khanal@example.com">bipin.khanal@example.com</a></li>
+          <li><span class="contact-label">GitHub</span><a href="#" title="Replace with your GitHub profile URL">github.com/bipinkhanal</a></li>
+          <li><span class="contact-label">LinkedIn</span><a href="#" title="Replace with your LinkedIn profile URL">linkedin.com/in/bipinkhanal</a></li>
+          <li><span class="contact-label">Location</span><span>Kathmandu, Nepal</span></li>
+        </ul>
+        <p class="contact-note">
+          Replace the placeholder email and profile links above with your real contact details
+          before publishing this site.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© <span id="year"></span> Bipin Khanal. Built with HTML, CSS, JavaScript, and Node.js.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
